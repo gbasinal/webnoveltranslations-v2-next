@@ -1,5 +1,6 @@
 'use client';
 
+import Header from '@/components/Header';
 import { useEffect, useState } from 'react';
 
 export default function Page() {
@@ -28,36 +29,39 @@ export default function Page() {
   }, [selectedSlug]);
 
   return (
-    <main className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Chapters</h1>
+    <>
+      <Header/>
+      <main className="max-w-4xl mx-auto p-6">
+        <h1 className="text-2xl font-bold mb-4">Chapters</h1>
 
-      <div className="flex flex-col gap-2 sm:flex-row sm:gap-8">
-        {/* Chapter list */}
-        <ul className="w-full sm:w-1/3">
-          {chapters.map((chap: any) => (
-            <li key={chap.slug}>
-              <button
-                onClick={() => setSelectedSlug(chap.slug)}
-                className="text-left w-full py-2 px-3 rounded hover:bg-gray-200"
-              >
-                {chap.title.rendered}
-              </button>
-            </li>
-          ))}
-        </ul>
+        <div className="flex flex-col gap-2 sm:flex-row sm:gap-8">
+          {/* Chapter list */}
+          <ul className="w-full sm:w-1/3">
+            {chapters.map((chap: any) => (
+              <li key={chap.slug}>
+                <button
+                  onClick={() => setSelectedSlug(chap.slug)}
+                  className="text-left w-full py-2 px-3 rounded hover:bg-gray-200"
+                >
+                  {chap.title.rendered}
+                </button>
+              </li>
+            ))}
+          </ul>
 
-        {/* Chapter content */}
-        <div className="w-full sm:w-2/3 border rounded p-4 min-h-[300px]">
-          {selectedContent ? (
-            <div
-              dangerouslySetInnerHTML={{ __html: selectedContent }}
-              className="prose"
-            />
-          ) : (
-            <p>Select a chapter to view the content.</p>
-          )}
+          {/* Chapter content */}
+          <div className="w-full sm:w-2/3 border rounded p-4 min-h-[300px]">
+            {selectedContent ? (
+              <div
+                dangerouslySetInnerHTML={{ __html: selectedContent }}
+                className="prose"
+              />
+            ) : (
+              <p>Select a chapter to view the content.</p>
+            )}
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }
